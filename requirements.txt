@@ -1,0 +1,3 @@
+-f /Users/kennethlove/.pip/wheels
+Django==1.6.2
+wheel==0.22.0
