@@ -28,3 +28,8 @@ class TalkListCreateView(generic.CreateView):
         self.object.user = self.request.user
         self.object.save()
         return super(TalkListCreateView, self).form_valid(form)
+
+
+class TalkListUpdateView(RestrictToOwnerMixin, generic.UpdateView):
+    form_class = forms.TalkListForm
+    model = models.TalkList
