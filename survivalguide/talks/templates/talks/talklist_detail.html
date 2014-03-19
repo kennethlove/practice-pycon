@@ -1,0 +1,14 @@
+{% extends '_layouts/base.html' %}
+
+{% block title %}{{ object.name }} | Lists | {{ block.super }}{% endblock title %}
+
+{% block headline %}
+<h1>{{ object.name }}</h1>
+<h2>Your Lists</h2>
+{% endblock headline %}
+
+{% block content %}
+<p>This is a list.</p>
+
+<p><a href="{% url 'talks:lists:list' %}">Back</a></p>
+{% endblock %}

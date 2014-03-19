@@ -3,3 +3,4 @@ Django==1.6.2
 wheel==0.22.0
 django-crispy-forms==1.4.0
 django-braces==1.4.0
+south==0.8.4

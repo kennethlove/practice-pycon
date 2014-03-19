@@ -7,6 +7,8 @@ from django.views import generic
 
 from braces import views
 
+from talks.models import TalkList
+
 from .forms import RegistrationForm, LoginForm
 
 
@@ -17,6 +19,11 @@ class SignUpView(views.AnonymousRequiredMixin, views.FormValidMessageMixin,
     model = User
     success_url = reverse_lazy('login')
     template_name = 'accounts/signup.html'
+
+    def form_valid(self, form):
+        resp = super(SignUpView, self).form_valid(form)
+        TalkList.objects.create(user=self.object, name='To Attend')
+        return resp
 
 
 class LoginView(views.AnonymousRequiredMixin, views.FormValidMessageMixin,

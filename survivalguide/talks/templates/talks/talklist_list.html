@@ -1,0 +1,17 @@
+{% extends '_layouts/base.html' %}
+
+{% block title %}Lists | {{ block.super }}{% endblock title %}
+
+{% block headline %}<h1>Your Lists</h1>{% endblock headline %}
+
+{% block content %}
+<ul>
+    {% for object in object_list %}
+    <li><a href="{{ object.get_absolute_url }}">{{ object }}</a></li>
+    {% empty %}
+    <li>You have no lists</li>
+    {% endfor %}
+</ul>
+
+<p><a href="{% url 'talks:lists:create' %}" class="btn">Create a new list</a></p>
+{% endblock %}
