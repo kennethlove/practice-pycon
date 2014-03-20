@@ -11,3 +11,4 @@ class TalkListAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.TalkList, TalkListAdmin)
+admin.site.register(models.Talk)
