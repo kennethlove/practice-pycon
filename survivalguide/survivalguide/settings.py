@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'crispy_forms',
     'south',
+    'debug_toolbar',
     'talks',
 )
 

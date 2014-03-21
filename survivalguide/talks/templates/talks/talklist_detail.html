@@ -1,4 +1,5 @@
 {% extends '_layouts/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}{{ object.name }} | Lists | {{ block.super }}{% endblock title %}
 
@@ -8,7 +9,9 @@
 {% endblock headline %}
 
 {% block content %}
-<p>This is a list.</p>
+<ul>{{ object.talks.all|unordered_list }}</ul>
+
+{% crispy form %}
 
 <p><a href="{% url 'talks:lists:update' object.slug %}">Edit</a></p>
 <p><a href="{% url 'talks:lists:list' %}">Back</a></p>

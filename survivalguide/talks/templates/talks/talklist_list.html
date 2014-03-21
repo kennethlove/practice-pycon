@@ -7,7 +7,7 @@
 {% block content %}
 <ul>
     {% for object in object_list %}
-    <li><a href="{{ object.get_absolute_url }}">{{ object }}</a></li>
+    <li><a href="{{ object.get_absolute_url }}">{{ object }}</a>: {{ object.talk_count }} talk{{ object.talk_count|pluralize }}</li>
     {% empty %}
     <li>You have no lists</li>
     {% endfor %}

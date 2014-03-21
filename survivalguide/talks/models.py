@@ -42,6 +42,7 @@ class Talk(models.Model):
     room = models.CharField(max_length=10, choices=ROOM_CHOICES)
 
     class Meta:
+        ordering = ('when', 'room')
         unique_together = ('talk_list', 'name')
 
     def __unicode__(self):
