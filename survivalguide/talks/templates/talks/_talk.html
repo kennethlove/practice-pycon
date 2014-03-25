@@ -1,0 +1,10 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <a class="close" aria-hidden="true" class="pull-right" href="{% url 'talks:lists:remove_talk' talk.talk_list_id talk.id %}">&times;</a>
+        <h1 class="panel-title">{{ talk.name }}</h1>
+    </div>
+    <div class="panel-body">
+        <p class="bg-primary" style="padding: 15px"><strong>{{ talk.when }}</strong> in <strong>{{ talk.room }}</strong></p>
+        <p>by <strong>{{ talk.host }}</strong>.</p>
+    </div>
+</div>

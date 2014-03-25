@@ -9,10 +9,26 @@
 {% endblock headline %}
 
 {% block content %}
-<ul>{{ object.talks.all|unordered_list }}</ul>
+<div class="row">
+    <div class="col-sm-6">
+        {% for talk in object.talks.all %}
+            {% include 'talks/_talk.html' %}
+        {% endfor %}
+    </div>
 
-{% crispy form %}
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Add a new talk</h1>
+            </div>
+            <div class="panel-body">
+                {% crispy form %}
 
-<p><a href="{% url 'talks:lists:update' object.slug %}">Edit</a></p>
-<p><a href="{% url 'talks:lists:list' %}">Back</a></p>
+            </div>
+        </div>
+
+        <p><a href="{% url 'talks:lists:update' object.slug %}">Edit this list</a></p>
+        <p><a href="{% url 'talks:lists:list' %}">Back to lists</a></p>
+    </div>
+</div>
 {% endblock %}

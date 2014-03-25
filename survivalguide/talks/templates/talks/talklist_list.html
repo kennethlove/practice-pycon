@@ -5,13 +5,21 @@
 {% block headline %}<h1>Your Lists</h1>{% endblock headline %}
 
 {% block content %}
-<ul>
-    {% for object in object_list %}
-    <li><a href="{{ object.get_absolute_url }}">{{ object }}</a>: {{ object.talk_count }} talk{{ object.talk_count|pluralize }}</li>
-    {% empty %}
-    <li>You have no lists</li>
-    {% endfor %}
-</ul>
-
-<p><a href="{% url 'talks:lists:create' %}" class="btn">Create a new list</a></p>
+<div class="row">
+    <div class="col-sm-6">
+        <ul class="list-group">
+            {% for object in object_list %}
+            <li class="list-group-item">
+                <span class="badge">{{ object.talk_count }}</span>
+                <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+            </li>
+            {% empty %}
+            <li class="list-group-item">You have no lists</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        <p><a href="{% url 'talks:lists:create' %}" class="btn">Create a new list</a></p>
+    </div>
+</div>
 {% endblock %}

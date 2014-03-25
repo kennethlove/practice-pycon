@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <style>
         body {
-            padding-top: 70px;
             padding-bottom: 20px;
+            padding-top: 70px;
         }
         .messages {
             list-style: none;
@@ -30,6 +30,7 @@
             <a href="{% url 'signup' %}" class="btn btn-default navbar-btn">Register</a>
             <a href="{% url 'login' %}" class="btn btn-default navbar-btn">Login</a>
             {% else %}
+            <a href="{% url 'talks:lists:list' %}" class="btn btn-primary navbar-btn">Talk lists</a>
             <a href="{% url 'logout' %}" class="btn btn-default navbar-btn">Logout</a>
             {% endif %}
         </div><!--/.navbar-collapse -->

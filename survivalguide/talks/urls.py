@@ -13,6 +13,10 @@ lists_patterns = patterns(
     url(r'^create/$', views.TalkListCreateView.as_view(), name='create'),
     url(r'^update/(?P<slug>[-\w]+)/$', views.TalkListUpdateView.as_view(),
         name='update'),
+    url(r'^remove/(?P<talklist_pk>\d+)/(?P<pk>\d+)/$',
+        views.TalkListRemoveTalkView.as_view(),
+        name='remove_talk'),
+
 )
 
 urlpatterns = patterns(

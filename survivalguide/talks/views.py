@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.db.models import Count
+from django.http import Http404
 from django.shortcuts import redirect
 from django.views import generic
 
@@ -66,3 +68,33 @@ class TalkListCreateView(generic.CreateView):
 class TalkListUpdateView(RestrictToOwnerMixin, generic.UpdateView):
     form_class = forms.TalkListForm
     model = models.TalkList
+
+
+class TalkListRemoveTalkView(generic.RedirectView):
+    model = models.Talk
+
+    def get_redirect_url(self, *args, **kwargs):
+        return self.talklist.get_absolute_url()
+
+    def get_object(self, pk, talklist_pk):
+        try:
+            talk = self.model.objects.get(
+                pk=pk,
+                talk_list_id=talklist_pk
+            )
+        except models.Talk.DoesNotExist:
+            raise Http404
+        else:
+            return talk
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(kwargs.get('pk'),
+                                      kwargs.get('talklist_pk'))
+        self.talklist = self.object.talk_list
+        messages.success(
+            request,
+            u'{0.name} was removed from {1.name}'.format(
+                self.object, self.talklist))
+        self.object.delete()
+        return super(TalkListRemoveTalkView, self).get(request, *args,
+                                                       **kwargs)

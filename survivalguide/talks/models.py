@@ -40,6 +40,7 @@ class Talk(models.Model):
     slug = models.SlugField(max_length=255, blank=True)
     when = models.DateTimeField()
     room = models.CharField(max_length=10, choices=ROOM_CHOICES)
+    host = models.CharField(max_length=255)
 
     class Meta:
         ordering = ('when', 'room')
@@ -53,7 +54,8 @@ class Talk(models.Model):
         super(Talk, self).save(*args, **kwargs)
 
     def clean(self):
-        pycon_start = datetime.datetime(2014, 4, 11).replace(tzinfo=utc)
-        pycon_end = datetime.datetime(2014, 4, 13, 17).replace(tzinfo=utc)
-        if not pycon_start < self.when < pycon_end:
-            raise ValidationError("'when' is outside of PyCon.")
+        if self.pk:
+            pycon_start = datetime.datetime(2014, 4, 11).replace(tzinfo=utc)
+            pycon_end = datetime.datetime(2014, 4, 13, 17).replace(tzinfo=utc)
+            if not pycon_start < self.when < pycon_end:
+                raise ValidationError("'when' is outside of PyCon.")
