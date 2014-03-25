@@ -1,0 +1,40 @@
+{% extends '_layouts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ object.name }} | Lists | {{ block.super }}{% endblock title %}
+
+{% block headline %}
+<h1>{{ object.name }}</h1>
+<h2>Your Lists</h2>
+{% endblock headline %}
+
+{% block content %}
+{% regroup object.talks.all by when|date:"Y/m/d" as day_list %}
+{% for day in day_list %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 class="panel-title">{{ day.grouper }}</h1>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Room</th>
+                <th>Time</th>
+                <th>Talk</th>
+                <th>Presenter(s)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for talk in day.list %}
+            <tr>
+                <td>{{ talk.room }}</td>
+                <td>{{ talk.when|date:"h:i A" }}</td>
+                <td>{{ talk.name }}</td>
+                <td>{{ talk.host }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endfor %}
+{% endblock %}

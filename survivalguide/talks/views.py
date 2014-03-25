@@ -70,6 +70,16 @@ class TalkListUpdateView(RestrictToOwnerMixin, generic.UpdateView):
     model = models.TalkList
 
 
+class TalkListScheduleView(
+    RestrictToOwnerMixin,
+    views.PrefetchRelatedMixin,
+    generic.DetailView
+):
+    model = models.TalkList
+    prefetch_related = ('talks',)
+    template_name = 'talks/schedule.html'
+
+
 class TalkListRemoveTalkView(generic.RedirectView):
     model = models.Talk
 

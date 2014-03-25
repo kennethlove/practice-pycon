@@ -11,6 +11,7 @@
 {% block content %}
 <div class="row">
     <div class="col-sm-6">
+        <p><a href="{% url 'talks:lists:schedule' object.slug %}">Schedule</a></p>
         {% for talk in object.talks.all %}
             {% include 'talks/_talk.html' %}
         {% endfor %}
