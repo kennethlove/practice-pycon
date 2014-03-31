@@ -112,23 +112,44 @@ class TalkListRemoveTalkView(generic.RedirectView):
 
 class TalkDetailView(views.LoginRequiredMixin, generic.DetailView):
     http_method_names = ['get', 'post']
-    form_class = forms.TalkRatingForm
     model = models.Talk
 
     def get_queryset(self):
         return self.model.objects.filter(talk_list__user=self.request.user)
 
+    def get_forms(self, request, obj):
+        rating_form = forms.TalkRatingForm(request.POST or None,
+                                           instance=obj)
+        list_form = forms.TalkTalkListForm(request.POST or None,
+                                           instance=obj,
+                                           user=request.user)
+        return rating_form, list_form
+
+
     def get_context_data(self, **kwargs):
         context = super(TalkDetailView, self).get_context_data(**kwargs)
         obj = context['object']
-        rating_form = self.form_class(self.request.POST or None, instance=obj)
-        context.update({'rating_form': rating_form})
+        rating_form, list_form = self.get_forms(self.request, obj)
+        context.update({
+            'rating_form': rating_form,
+            'list_form': list_form
+        })
         return context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = self.form_class(request.POST, instance=self.object)
-        if form.is_valid():
-            form.save()
+        if 'save' in request.POST:
+            talk_form = forms.TalkRatingForm(request.POST or None,
+                                             instance=self.object)
+            if talk_form.is_valid():
+                talk_form.save()
+
+        if 'move' in request.POST:
+            list_form = forms.TalkTalkListForm(request.POST or None,
+                                               instance=self.object,
+                                               user=request.user)
+            if list_form.is_valid():
+                list_form.save()
+
         return redirect(self.object)
 

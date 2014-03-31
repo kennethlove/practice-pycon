@@ -23,22 +23,44 @@
         </div>
         <div class="col-sm-4">
             <div class="well">
-                <h3>Current ratings</h3>
-                <dl class="dl-horizontal">
-                    <dt>Talk</dt>
-                    <dd>{% show_stars object.talk_rating %}</dd>
-                    <dt>Speaker</dt>
-                    <dd>{% show_stars object.speaker_rating %}</dd>
-                    <dt>Overall</dt>
-                    <dd>{% show_stars object.overall_rating %}</dd>
-                </dl>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Talk</th>
+                            <td>{% show_stars object.talk_rating %}</td>
+                        </tr>
+                        <tr>
+                            <th>Speaker</th>
+                            <td>{% show_stars object.speaker_rating %}</td>
+                        </tr>
+                        <tr>
+                            <th>Overall</th>
+                            <td>{% show_stars object.overall_rating %}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
     <hr>
     {% endif %}
 
-    {% crispy rating_form %}
+    <div class="row">
+        <div class="col-sm-8">
+            {% crispy rating_form %}
+        </div>
+        <div class="col-sm-4">
+            {% crispy list_form %}
+            <p><a href="{{ object.talk_list.get_absolute_url }}">Back to list</a></p>
+        </div>
+    </div>
+
 {% endblock content %}
 
 {% block css %}
