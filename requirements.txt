@@ -6,3 +6,5 @@ django-braces==1.4.0
 south==0.8.4
 django-debug-toolbar==1.0.1
 mistune==0.2.0
+dj_database_url==0.3.0
+whitenoise==0.13
