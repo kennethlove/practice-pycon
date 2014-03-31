@@ -8,3 +8,4 @@ mistune==0.2.0
 dj_database_url==0.3.0
 whitenoise==0.13
 gunicorn==18.0
+psycopg2==2.5.2
