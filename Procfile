@@ -1,1 +1,1 @@
-web: cd survivalguide && gunicorn survivalguide.wsgi
+web: gunicorn survivalguide.survivalguide.wsgi
