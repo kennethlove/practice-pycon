@@ -69,3 +69,9 @@ class Talk(models.Model):
 
     def get_absolute_url(self):
         return reverse('talks:talks:detail', kwargs={'slug': self.slug})
+
+    @property
+    def overall_rating(self):
+        if self.talk_rating and self.speaker_rating:
+            return (self.talk_rating + self.speaker_rating) / 2
+        return 0

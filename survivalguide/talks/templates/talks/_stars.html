@@ -1,0 +1,8 @@
+{% for star in star_count %}
+<i class="glyphicon glyphicon-star" style="color:#fc0; font-size:24px"></i>
+{% endfor %}
+{% if leftover_count %}
+    {% for star in leftover_count %}
+    <i class="glyphicon glyphicon-star-empty" style="font-size:24px"></i>
+    {% endfor %}
+{% endif %}

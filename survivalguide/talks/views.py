@@ -120,8 +120,8 @@ class TalkDetailView(views.LoginRequiredMixin, generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(TalkDetailView, self).get_context_data(**kwargs)
-        rating_form = self.form_class(self.request.POST or None,
-                                      instance=self.get_object())
+        obj = context['object']
+        rating_form = self.form_class(self.request.POST or None, instance=obj)
         context.update({'rating_form': rating_form})
         return context
 
