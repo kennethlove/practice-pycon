@@ -7,6 +7,8 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.timezone import utc
 
+import mistune
+
 
 class TalkList(models.Model):
     user = models.ForeignKey(User, related_name='lists')
@@ -41,6 +43,10 @@ class Talk(models.Model):
     when = models.DateTimeField()
     room = models.CharField(max_length=10, choices=ROOM_CHOICES)
     host = models.CharField(max_length=255)
+    talk_rating = models.IntegerField(blank=True, default=0)
+    speaker_rating = models.IntegerField(blank=True, default=0)
+    notes = models.TextField(blank=True, default='')
+    notes_html = models.TextField(blank=True, default='', editable=False)
 
     class Meta:
         ordering = ('when', 'room')
@@ -51,6 +57,7 @@ class Talk(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+        self.notes_html = mistune.markdown(self.notes)
         super(Talk, self).save(*args, **kwargs)
 
     def clean(self):
@@ -59,3 +66,6 @@ class Talk(models.Model):
             pycon_end = datetime.datetime(2014, 4, 13, 17).replace(tzinfo=utc)
             if not pycon_start < self.when < pycon_end:
                 raise ValidationError("'when' is outside of PyCon.")
+
+    def get_absolute_url(self):
+        return reverse('talks:talks:detail', kwargs={'slug': self.slug})

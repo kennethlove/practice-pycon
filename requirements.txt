@@ -5,3 +5,4 @@ django-crispy-forms==1.4.0
 django-braces==1.4.0
 south==0.8.4
 django-debug-toolbar==1.0.1
+mistune==0.2.0

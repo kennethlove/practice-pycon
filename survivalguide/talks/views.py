@@ -108,3 +108,27 @@ class TalkListRemoveTalkView(generic.RedirectView):
         self.object.delete()
         return super(TalkListRemoveTalkView, self).get(request, *args,
                                                        **kwargs)
+
+
+class TalkDetailView(views.LoginRequiredMixin, generic.DetailView):
+    http_method_names = ['get', 'post']
+    form_class = forms.TalkRatingForm
+    model = models.Talk
+
+    def get_queryset(self):
+        return self.model.objects.filter(talk_list__user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super(TalkDetailView, self).get_context_data(**kwargs)
+        rating_form = self.form_class(self.request.POST or None,
+                                      instance=self.get_object())
+        context.update({'rating_form': rating_form})
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(request.POST, instance=self.object)
+        if form.is_valid():
+            form.save()
+        return redirect(self.object)
+

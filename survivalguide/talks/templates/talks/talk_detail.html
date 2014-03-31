@@ -1,0 +1,31 @@
+{% extends "_layouts/base.html" %}
+{% load static from staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ object.name }} | Talks | {{ block.super }}{% endblock title %}
+
+{% block headline %}
+<h1>{{ object.name }}</h1>
+<h2>
+    <span class="text-primary">{{ object.host }}</span>
+    <strong>at {{ object.when }}</strong>
+    in <span class="text-info">Room {{ object.room }}</span>
+</h2>
+{% endblock headline %}
+
+{% block content %}
+    {% if object.notes_html %}
+    <h3>Notes</h3>
+    {{ object.notes_html|safe }}
+    <hr>
+    {% endif %}
+    {% crispy rating_form %}
+{% endblock content %}
+
+{% block css %}
+<link href="{% static 'talks/css/star-rating.min.css' %}" rel="stylesheet">
+{% endblock css %}
+
+{% block js %}
+<script src="{% static 'talks/js/star-rating.min.js' %}"></script>
+{% endblock %}

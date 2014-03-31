@@ -18,10 +18,16 @@ lists_patterns = patterns(
     url(r'^remove/(?P<talklist_pk>\d+)/(?P<pk>\d+)/$',
         views.TalkListRemoveTalkView.as_view(),
         name='remove_talk'),
+)
 
+talks_patterns = patterns(
+    '',
+    url('^d/(?P<slug>[-\w]+)/$', views.TalkDetailView.as_view(),
+        name='detail'),
 )
 
 urlpatterns = patterns(
     '',
     url(r'^lists/', include(lists_patterns, namespace='lists')),
+    url(r'^talks/', include(talks_patterns, namespace='talks')),
 )
