@@ -82,9 +82,9 @@ class TalkTalkListForm(forms.ModelForm):
         fields = ('talk_list',)
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user')
         super(TalkTalkListForm, self).__init__(*args, **kwargs)
-        self.fields['talk_list'].queryset = user.lists.all()
+        self.fields['talk_list'].queryset = (
+            self.instance.talk_list.user.lists.all())
 
         self.helper = FormHelper()
         self.helper.layout = Layout(

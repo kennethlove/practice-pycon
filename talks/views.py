@@ -117,19 +117,13 @@ class TalkDetailView(views.LoginRequiredMixin, generic.DetailView):
     def get_queryset(self):
         return self.model.objects.filter(talk_list__user=self.request.user)
 
-    def get_forms(self, request, obj):
-        rating_form = forms.TalkRatingForm(request.POST or None,
-                                           instance=obj)
-        list_form = forms.TalkTalkListForm(request.POST or None,
-                                           instance=obj,
-                                           user=request.user)
-        return rating_form, list_form
-
-
     def get_context_data(self, **kwargs):
         context = super(TalkDetailView, self).get_context_data(**kwargs)
         obj = context['object']
-        rating_form, list_form = self.get_forms(self.request, obj)
+        rating_form = forms.TalkRatingForm(self.request.POST or None,
+                                           instance=obj)
+        list_form = forms.TalkTalkListForm(self.request.POST or None,
+                                           instance=obj)
         context.update({
             'rating_form': rating_form,
             'list_form': list_form
