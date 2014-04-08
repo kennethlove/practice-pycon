@@ -1,6 +1,6 @@
-*****
-Views
-*****
+**************
+TalkList Views
+**************
 
 Our ``TalkLists`` need a few different views, so let's look at creating those.
 

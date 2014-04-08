@@ -90,7 +90,8 @@ class TalkListRemoveTalkView(generic.RedirectView):
         try:
             talk = self.model.objects.get(
                 pk=pk,
-                talk_list_id=talklist_pk
+                talk_list_id=talklist_pk,
+                talk_list__user=self.request.user
             )
         except models.Talk.DoesNotExist:
             raise Http404

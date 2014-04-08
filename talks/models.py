@@ -1,11 +1,7 @@
-import datetime
-
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
-from django.utils.timezone import utc
 
 import mistune
 
@@ -59,13 +55,6 @@ class Talk(models.Model):
         self.slug = slugify(self.name)
         self.notes_html = mistune.markdown(self.notes)
         super(Talk, self).save(*args, **kwargs)
-
-    def clean(self):
-        if self.pk:
-            pycon_start = datetime.datetime(2014, 4, 11).replace(tzinfo=utc)
-            pycon_end = datetime.datetime(2014, 4, 13, 17).replace(tzinfo=utc)
-            if not pycon_start < self.when < pycon_end:
-                raise ValidationError("'when' is outside of PyCon.")
 
     def get_absolute_url(self):
         return reverse('talks:talks:detail', kwargs={'slug': self.slug})

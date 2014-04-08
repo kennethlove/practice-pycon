@@ -24,7 +24,8 @@ Contents:
    Django <django>
    AuthViews <authviews>
    Talks app <talks>
-   Talks views <talksviews>
+   TalkLists views <talklistsviews>
+   Talks models <talksmodel>
 
 
 
