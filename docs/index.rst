@@ -26,6 +26,7 @@ Contents:
    Talks app <talks>
    TalkLists views <talklistsviews>
    Talks models <talksmodel>
+   Talks detail <talksdetail>
 
 
 

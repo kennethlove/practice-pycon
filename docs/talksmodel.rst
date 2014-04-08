@@ -333,6 +333,8 @@ Template
 Our new template file is, of course, ``talks/templates/talks/schedule.html``
 
 .. code-block:: html
+   :linenos:
+   :emphasize-lines: 11, 12, 15, 27
 
     {% extends '_layouts/base.html' %}
 
@@ -373,3 +375,5 @@ Our new template file is, of course, ``talks/templates/talks/schedule.html``
     </div>
     {% endfor %}
     {% endblock %}
+
+The special thing about this template is how we regroup the talks. We want them grouped and sorted by their dates. Using ``{% regroup %}`` gives us this ability and a new object that is a list of dictionaries with two keys, ``grouper`` which holds our day; and ``list``, which is a list of the instances in that group.
