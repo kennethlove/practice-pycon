@@ -54,4 +54,21 @@ If you look at this file, it should contain entries like:
 
 The last thing we need to do before we send things to Heroku is to create the ``Procfile`` that tells Heroku what to run. Ours just needs one process which looks like:
 
-``web: python manage.py run_gunicorn``
+``web: gunicorn survivalguide.wsgi``
+
+This tells Heroku to run ``gunicorn`` with our ``wsgi.py`` file.
+
+Settings
+--------
+
+In our ``settings.py`` file, we need to set ``DEBUG`` to ``False`` and change ``ALLOWED_HOSTS`` to ``['*']`` since we don't yet know our Heroku URL.
+
+Deploy
+------
+
+Now that we have everything collected and added into Git, we're ready to send our project to Heroku.
+
+``heroku create`` will make Heroku create a new installation for us and set the Git remote locally. Now we can do ``git push heroku master`` and send all of our files to Heroku.
+
+Once the process finishes, if you don't see any errors, you'll need to sync the database with ``heroku run python manage.py syncdb`` and create a superuser. Then ``heroku open`` will open your site in your browser.
+
