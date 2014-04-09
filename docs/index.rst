@@ -27,6 +27,7 @@ Contents:
    TalkLists views <talklistsviews>
    Talks models <talksmodel>
    Talks detail <talksdetail>
+   Deployment <deployment>
 
 
 

@@ -48,8 +48,19 @@ Like with our ``TalkList`` model, we want to ``slugify`` the name whenever we sa
 
 Also, we want default ordering of the model to be by when the talk happens, in ascending order, and then by room number.
 
+Migration
+---------
+
+Since we've added a model, we need to create and apply a migration.
+
+::
+
+    python manage.py schemamigration --auto talks
+    python manage.py migrate talks
+
+
 Form
-====
+----
 
 We should create a form for creating talks. In ``forms.py``, let's add ``TalkForm``:
 
@@ -94,7 +105,7 @@ This ``ModelForm`` should look pretty similar to the other ones we've created so
 We get the current value of ``when``, then check it against two ``datetime`` objects that represent the start and end dates of PyCon. So long as our submitted date is between those two ``datetime``\ s, we're happy.
 
 Update ``TalkListDetailView``
-=============================
+-----------------------------
 
 So now we need to be able to add a ``Talk`` to a ``TalkList``. If you noticed on the ``TalkForm``, we don't pass through the ``talk_list`` field because we'll do this in the view. But we aren't going to create a custom view for this, even though we could. We'll just extend the ``TalkListDetailView`` to handle this new bit of functionality.
 
