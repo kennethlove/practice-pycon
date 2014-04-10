@@ -139,7 +139,7 @@ If give a model ratings, it's going to want a form.
                 )
             )
 
-As you can see on line 4, we limit the fields to just the two rating fields. We also add them to a ``Fieldset`` with a caption of "Rating". We also gave both fields a ``css_class`` of ``'rating'``. We'll use this to apply some CSS and Javascript soon.
+As you can see on line 8, we limit the fields to just the two rating fields. We also add them to a ``Fieldset`` with a caption of "Rating". We also gave both fields a ``css_class`` of ``'rating'``. We'll use this to apply some CSS and Javascript soon.
 
 View
 ^^^^

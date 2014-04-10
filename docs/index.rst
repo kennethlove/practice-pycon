@@ -14,6 +14,7 @@ Prerequisites:
 - Git
 - Python 2.7
 - A Heroku account and the Heroku toolbelt installed
+- Completed the `Polls tutorial <https://docs.djangoproject.com/en/1.6/intro/tutorial01/>`_
 
 Contents:
 
@@ -28,6 +29,7 @@ Contents:
    Talks models <talksmodel>
    Talks detail <talksdetail>
    Deployment <deployment>
+   Resources <resources>
 
 
 

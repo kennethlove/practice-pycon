@@ -120,7 +120,7 @@ So, back in ``views.py``, let's update ``TalkListDetailView``:
    [...]
 
    class TalkListDetailView(
-       RestrictToOwnerMixin,
+       RestrictToUserMixin,
        views.PrefetchRelatedMixin,
        generic.DetailView
    ):
@@ -202,15 +202,15 @@ In ``views.py``, let's fix this extra query.
    [...]
 
    class TalkListListView(
-       RestrictToOwnerMixin,
+       RestrictToUserMixin,
        generic.ListView
    ):
-   model = models.TalkList
+       model = models.TalkList
 
-   def get_queryset(self):
-       queryset = super(TalkListListView, self).get_queryset()
-       queryset = queryset.annotate(talk_count=Count('talks'))
-       return queryset
+       def get_queryset(self):
+           queryset = super(TalkListListView, self).get_queryset()
+           queryset = queryset.annotate(talk_count=Count('talks'))
+           return queryset
 
 We're using Django's ``Count`` annotation to add a ``talk_count`` attribute to each instance in the queryset, which means all of the counting is done by our database and we don't ever have to touch the ``Talk`` related items.
 
@@ -221,7 +221,7 @@ Show the talks on a list
 
 We aren't currently showing the talks that belong to a list, so let's fix that.
 
-In ``talks/templates/talklist_detail.html``, the leftside column should contain:
+In ``talks/templates/talks/talklist_detail.html``, the leftside column should contain:
 
 .. code-block:: html
 
@@ -256,7 +256,12 @@ Since we can add talks to a list, we should be able to remove them. Let's make a
 .. code-block:: python
    :linenos:
 
-   class TalkListRemoveTalkView(generic.RedirectView):
+   from django.contrib import messages
+
+   class TalkListRemoveTalkView(
+       views.LoginRequiredView,
+       generic.RedirectView
+   ):
        model = models.Talk
 
        def get_redirect_url(self, *args, **kwargs):
@@ -315,7 +320,7 @@ In ``views.py``, we're going to add:
 .. code-block:: python
 
     class TalkListScheduleView(
-        RestrictToOwnerMixin,
+        RestrictToUserMixin,
         views.PrefetchRelatedMixin,
         generic.DetailView
     ):

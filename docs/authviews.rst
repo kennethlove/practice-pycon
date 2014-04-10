@@ -77,7 +77,7 @@ Since we want to be able to get to the view from a URL, we should add one to ``s
    from .views import SignUpView
    [...]
 
-   url(r'accounts/register/$', SignUpView.as_view(), name='signup'),
+   url(r'^accounts/register/$', SignUpView.as_view(), name='signup'),
    [...]
 
 
@@ -148,7 +148,7 @@ New form
 View changes
 ------------
 
-In ``survivalguide/forms.py``, we need to change our form import from:
+In ``survivalguide/views.py``, we need to change our form import from:
 
 .. code-block:: python
 
@@ -214,6 +214,8 @@ Then, we should create a view.
     [...]
     from django.contrib.auth import authenticate, login, logout
     from django.core.urlresolvers import reverse_lazy
+    [...]
+    from .forms import LoginForm
     [...]
 
     class LoginView(generic.FormView):
@@ -294,7 +296,7 @@ And in our ``survivalguide/urls.py``, we'll import the new view and create an UR
    from .views import LogOutView
    [...]
 
-   url(r'accounts/logout/$', LogOutView.as_view(), name='logout'),
+   url(r'^accounts/logout/$', LogOutView.as_view(), name='logout'),
    [...]
 
 

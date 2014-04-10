@@ -219,7 +219,7 @@ We don't yet have a ``talks/forms.py`` so go ahead and create it with the follow
             )
 
 
-Nothing really different here from our earlier forms except for line 18 which restricts the fields that the form cares about to just the ``name`` field.
+Nothing really different here from our earlier forms except for line 13 which restricts the fields that the form cares about to just the ``name`` field.
 
 URL
 ---

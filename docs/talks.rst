@@ -7,7 +7,7 @@ Now we can get to the meat of our project, the talks app.
 ``startapp``
 ------------
 
-To start our app, we can to tell Django to give us some boilerplate right away with ``python manage.py startappy talks``. We want app names to be plural, generally, as they usually concern themselves with multiple model instances and work around them.
+To start our app, we can to tell Django to give us some boilerplate right away with ``python manage.py startapp talks``. We want app names to be plural, generally, as they usually concern themselves with multiple model instances and work around them.
 
 This will give us a structure similar to:
 

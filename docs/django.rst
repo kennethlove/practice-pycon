@@ -19,7 +19,7 @@ Database
 
 For the purposes of this demo, we aren't going to use a *real* database like Postgres locally so we don't have to install ``psycopg2``. We'll stick with SQLite3, but feel free to swap it out for a local Postgres database if you want.
 
-We do need to run ``python manage.py migrate`` to get our default tables set up. Go ahead and create a superuser, too.
+We do need to run ``python manage.py syncdb`` to get our default tables set up. Go ahead and create a superuser, too.
 
 Template Dirs
 -------------
